@@ -175,8 +175,8 @@ resource appGateWay 'Microsoft.Network/applicationGateways@2022-11-01' = {
       {
         name: 'probe-web${baseName}'
         properties: {
-          protocol: 'Http'
-          path: '/favicon.ico'
+          protocol: 'Https'
+          path: '/'
           interval: 30
           timeout: 30
           unhealthyThreshold: 3
@@ -220,10 +220,11 @@ resource appGateWay 'Microsoft.Network/applicationGateways@2022-11-01' = {
       {
         name: 'WebAppBackendHttpSettings'
         properties: {
-          port: 80
-          protocol: 'Http'
+          port: 443
+          protocol: 'Https'
           cookieBasedAffinity: 'Disabled'
-          pickHostNameFromBackendAddress: true
+          pickHostNameFromBackendAddress: false
+          hostName: webApp.properties.defaultHostName
           requestTimeout: 20
           probe: {
             id: resourceId('Microsoft.Network/applicationGateways/probes', appGateWayName, 'probe-web${baseName}')
@@ -247,7 +248,7 @@ resource appGateWay 'Microsoft.Network/applicationGateways@2022-11-01' = {
           // sslCertificate: {
           //   id: resourceId('Microsoft.Network/applicationGateways/sslCertificates', appGateWayName, '${appGateWayName}-ssl-certificate')
           // }
-          hostName: appGateWayFqdn
+          //hostName: appGateWayFqdn
           hostNames: []
           requireServerNameIndication: false
           

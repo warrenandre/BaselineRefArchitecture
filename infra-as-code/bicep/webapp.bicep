@@ -23,7 +23,7 @@ param logWorkspaceName string
 var appName = 'app-${baseName}'
 var appServicePlanName = 'asp-${appName}${uniqueString(subscription().subscriptionId)}'
 var appServiceManagedIdentityName = 'id-${appName}'
-var packageLocation = 'https://${storageName}.blob.${environment().suffixes.storage}/deploy/${publishFileName}'
+var packageLocation = 'https://${storageName}.blob.core.windows.net/deploy/${publishFileName}'
 var appServicePrivateEndpointName = 'pep-${appName}'
 var appInsightsName= 'appinsights-${appName}'
 

@@ -150,6 +150,20 @@ resource appGatewaySubnetNsg 'Microsoft.Network/networkSecurityGroups@2022-11-01
         }
       }
       {
+        name: 'AppGw.In.Allow80.Internet'
+        properties: {
+          description: 'Allow ALL inbound web traffic on port 80'
+          protocol: '*'
+          sourcePortRange: '*'
+          destinationPortRange: '80'
+          sourceAddressPrefix: '*'
+          destinationAddressPrefix: '*'
+          access: 'Allow'
+          priority: 102
+          direction: 'Inbound'
+        }
+      }
+      {
         name: 'AppGw.Out.Allow.AppServices'
         properties: {
           description: 'Allow outbound traffic from the App Gateway subnet to the App services subnet'
